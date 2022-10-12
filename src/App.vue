@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <web-banner
+    v-bind:banData="banData"
+    @click="modalView=true"
+  ></web-banner>
+  <web-modal :mView="modalView" @mClose="modalClose"></web-modal>
+  <!-- <web-modal :mView="modalView" @modalClose="modalView=false"></web-modal> -->
+  {{modalView}}
+  
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import WebBanner from "@/components/WebBanner.vue"
+import banData from "@/data/directs.js"
+import "@/assets/style.css"
+import WebModal from "@/components/WebModal.vue"
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    WebBanner,
+    WebModal,
+  },
+  data(){
+    return {
+      banData:banData,
+      modalView:false,  // 오브젝트데이터
+    }
+  },
+  methods:{
+    modalClose(){
+      this.modalView=false  // 스크립트 영역
+    }
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style>
+/* @import url(./assets/style.css); */
+
 </style>
